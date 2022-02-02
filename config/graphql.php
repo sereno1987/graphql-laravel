@@ -2,6 +2,17 @@
 
 declare(strict_types = 1);
 
+use App\GraphQL\Mutations\Category\CreateCategoryMutation;
+use App\GraphQL\Mutations\Category\UpdateCategoryMutation;
+use App\GraphQL\Mutations\Quest\CreateQuestMutation;
+use App\GraphQL\Mutations\Quest\DeleteCategoryMutation;
+use App\GraphQL\Mutations\Quest\DeleteQuestMutation;
+use App\GraphQL\Mutations\Quest\UpdateQuestMutation;
+use App\GraphQL\Queries\Category\CategoriesQuery;
+use App\GraphQL\Queries\Category\CategoryQuery;
+use App\GraphQL\Queries\Quest\QuestQuery;
+use App\GraphQL\Queries\Quest\QuestsQuery;
+
 return [
     'route' => [
         // The prefix for routes; do NOT use a leading slash!
@@ -74,10 +85,18 @@ return [
     'schemas' => [
         'default' => [
             'query' => [
-                // ExampleQuery::class,
+                'quest' => QuestQuery::class,
+                'quests' => QuestsQuery::class,
+                'category' => CategoryQuery::class,
+                'categories' => CategoriesQuery::class,
             ],
             'mutation' => [
-                // ExampleMutation::class,
+                'createQuest' => CreateQuestMutation::class,
+                'updateQuest' => UpdateQuestMutation::class,
+                'deleteQuest' => DeleteQuestMutation::class,
+                'createCategory' => CreateCategoryMutation::class,
+                'updateCategory' => UpdateCategoryMutation::class,
+                'deleteCategory' =>DeleteCategoryMutation::class,
             ],
             // The types only available in this schema
             'types' => [
@@ -105,9 +124,8 @@ return [
     // ]
     //
     'types' => [
-        // ExampleType::class,
-        // ExampleRelationType::class,
-        // \Rebing\GraphQL\Support\UploadType::class,
+        'Quest' => \App\GraphQL\Types\QuestType::class,
+       'Category' => \App\GraphQL\Types\CategoryType::class
     ],
 
     // The types will be loaded on demand. Default is to load all types on each request
